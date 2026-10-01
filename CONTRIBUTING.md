@@ -38,6 +38,13 @@ annotations, field descriptions come from comments of request types and of resul
 `/api/v1/openapi.yaml` and rendered by Swagger UI ([swaggest/swgui](https://github.com/swaggest/swgui))
 at `/api/v1/docs/`.
 
+## Screenshots
+
+The screenshots in `docs/images/` are generated: `make screenshots` starts the local cluster,
+fills it with demo data through the API (the cluster is flushed first) and captures every UI page
+in the light and the dark theme with headless Chrome. It needs Node 22+ and Google Chrome or
+Chromium (`CHROME=/path/to/chrome` overrides the binary). Regenerate them when the UI changes.
+
 ## Publishing the image
 
 Images are published to the GitHub Container Registry. Create a personal access token with the

@@ -33,7 +33,8 @@ func TestDocumentationLinks(t *testing.T) {
 	files = append(files, "../../README.md", "../../CONTRIBUTING.md")
 
 	codeBlock := regexp.MustCompile("(?s)```.*?```")
-	link := regexp.MustCompile(`\[[^\]]*\]\(([^)\s]+)\)`)
+	// Markdown links and images, and images in HTML (<picture> for light and dark screenshots).
+	link := regexp.MustCompile(`\[[^\]]*\]\(([^)\s]+)\)|(?:src|srcset)="([^"\s]+)"`)
 
 	for _, file := range files {
 		raw, err := os.ReadFile(file)
@@ -44,7 +45,7 @@ func TestDocumentationLinks(t *testing.T) {
 		text := codeBlock.ReplaceAllString(string(raw), "")
 
 		for _, m := range link.FindAllStringSubmatch(text, -1) {
-			target := m[1]
+			target := m[1] + m[2]
 			if strings.Contains(target, "://") || strings.HasPrefix(target, "mailto:") {
 				continue
 			}

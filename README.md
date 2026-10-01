@@ -26,6 +26,11 @@ not point it at production data.
 
 Tested against Redis 7.4, Redis 8, Valkey 8 and Valkey 9 in every topology.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/overview-dark.png">
+  <img alt="Web UI: nodes of a Redis cluster" src="docs/images/overview-light.png">
+</picture>
+
 ## Quick start
 
 Try redigate against a Redis or Valkey server running on your machine:

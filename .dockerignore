@@ -4,5 +4,7 @@
 bin
 .github
 *.md
+docs
+scripts
 # Local secrets must never reach the build context.
 .env

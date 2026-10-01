@@ -11,7 +11,7 @@ COMPOSE := docker compose
 PROFILES := --profile standalone --profile cluster --profile sentinel
 REDIS_IMAGES ?= redis:7.4 redis:8 valkey/valkey:8 valkey/valkey:9
 
-.PHONY: build run test lint tidy docker docker-login docker-push swagger up down test-integration test-matrix
+.PHONY: build run test lint tidy docker docker-login docker-push swagger up down screenshots test-integration test-matrix
 
 build:
 	CGO_ENABLED=0 go build -trimpath -ldflags "$(LDFLAGS)" -o bin/redigate ./cmd/redigate
@@ -65,6 +65,10 @@ up:
 
 down:
 	$(COMPOSE) $(PROFILES) --profile test down -v --remove-orphans
+
+# Regenerates docs/images: demo data in the local cluster (flushed first), then headless Chrome.
+screenshots: up
+	node scripts/screenshots.mjs
 
 # Runs integration tests inside the compose network against a fresh deployment.
 test-integration:

@@ -113,7 +113,7 @@ func (s *Server) routes(mux *http.ServeMux) {
 	//	@Tags			general
 	//	@Accept			json,plain
 	//	@Produce		json
-	//	@Param			body		body		CommandRequest	true	"JSON or a command line"
+	//	@Param			body		CommandRequest	true	"JSON or a command line"
 	//	@Param			node		query		string			false	"Node address"
 	//	@Param			target		query		string			false	"masters, replicas, all or sentinels"
 	//	@Param			db			query		int				false	"Database"
@@ -131,7 +131,7 @@ func (s *Server) routes(mux *http.ServeMux) {
 	//	@Tags			general
 	//	@Accept			json,plain
 	//	@Produce		json
-	//	@Param			body		body		PipelineRequest	true	"JSON or command lines"
+	//	@Param			body		PipelineRequest	true	"JSON or command lines"
 	//	@Param			node		query		string			false	"Node address"
 	//	@Param			db			query		int				false	"Database"
 	//	@Param			atomic		query		bool			false	"MULTI/EXEC"

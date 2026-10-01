@@ -73,7 +73,7 @@ func (ui *UI) overview(w http.ResponseWriter, r *http.Request) {
 		row := nodeRow{Addr: node.Addr, Role: node.Role, OK: node.OK, LatencyMS: node.LatencyMS, Error: node.Error}
 
 		if sections, ok := info[node.Addr]; ok {
-			row.Version = str(sections["server"]["redis_version"])
+			row.Version = serverVersion(sections["server"])
 			row.Memory = str(sections["memory"]["used_memory_human"])
 			row.Clients = str(sections["clients"]["connected_clients"])
 			row.Keys = keyspaceKeys(sections["keyspace"])
@@ -87,6 +87,22 @@ func (ui *UI) overview(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ui.render(w, r, http.StatusOK, "overview", "page", ui.page(r, "Overview", "overview", data))
+}
+
+// serverVersion returns the server name and version. Valkey reports redis_version 7.2.4
+// for compatibility, its own version is valkey_version.
+func serverVersion(server map[string]any) string {
+	for _, name := range []string{"valkey", "redis"} {
+		if version := str(server[name+"_version"]); version != "" {
+			if name == "redis" && str(server["server_name"]) != "" && str(server["server_name"]) != "redis" {
+				name = str(server["server_name"])
+			}
+
+			return name + " " + version
+		}
+	}
+
+	return ""
 }
 
 // keyspaceKeys sums keys over databases: db0:keys=1,expires=0,avg_ttl=0.

@@ -101,7 +101,7 @@ func send(t *testing.T, srv *httptest.Server, req request) (response, string) {
 	}
 
 	if req.htmx {
-		r.Header.Set("HX-Request", "true")
+		r.Header.Set("Hx-Request", "true")
 	}
 
 	if req.cookie != "" {
@@ -302,7 +302,7 @@ func TestAuth(t *testing.T) {
 		t.Errorf("unauthenticated page: %d %s", resp.StatusCode, resp.Header.Get("Location"))
 	}
 
-	if resp, _ := send(t, srv, request{path: "/ui/keys/rows", htmx: true}); resp.StatusCode != http.StatusUnauthorized || resp.Header.Get("HX-Redirect") != "/ui/login" {
+	if resp, _ := send(t, srv, request{path: "/ui/keys/rows", htmx: true}); resp.StatusCode != http.StatusUnauthorized || resp.Header.Get("Hx-Redirect") != "/ui/login" {
 		t.Errorf("unauthenticated htmx request: %d", resp.StatusCode)
 	}
 

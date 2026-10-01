@@ -78,7 +78,7 @@ func (s *Server) serverRoutes(mux *http.ServeMux) {
 	//	@Description	CONFIG SET on every data node by default.
 	//	@Tags			server
 	//	@Produce		json
-	//	@Param			body	body		ConfigSetRequest	true	"Request body"
+	//	@Param			body	ConfigSetRequest	true	"Request body"
 	//	@Param			node	query		string				false	"Node address"
 	//	@Param			target	query		string				false	"masters, replicas, all or sentinels"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
@@ -180,7 +180,7 @@ func (s *Server) serverRoutes(mux *http.ServeMux) {
 	//	@Description	CLIENT KILL with filters such as {"id": "42"} or {"user": "app"}.
 	//	@Tags			server
 	//	@Produce		json
-	//	@Param			body	body		ClientKillRequest	true	"Request body"
+	//	@Param			body	ClientKillRequest	true	"Request body"
 	//	@Param			node	query		string				false	"Node address"
 	//	@Param			target	query		string				false	"masters, replicas, all or sentinels"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
@@ -198,7 +198,7 @@ func (s *Server) serverRoutes(mux *http.ServeMux) {
 	//	@Description	CLIENT PAUSE on masters by default.
 	//	@Tags			server
 	//	@Produce		json
-	//	@Param			body	body		ClientPauseRequest	true	"Request body"
+	//	@Param			body	ClientPauseRequest	true	"Request body"
 	//	@Param			node	query		string				false	"Node address"
 	//	@Param			target	query		string				false	"masters, replicas, all or sentinels"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
@@ -383,7 +383,7 @@ func (s *Server) serverRoutes(mux *http.ServeMux) {
 	//	@Description	SHUTDOWN; node or target is required.
 	//	@Tags			server
 	//	@Produce		json
-	//	@Param			body	body		ShutdownRequest	true	"Request body"
+	//	@Param			body	ShutdownRequest	true	"Request body"
 	//	@Param			node	query		string			false	"Node address"
 	//	@Param			target	query		string			false	"masters, replicas, all or sentinels"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
@@ -401,7 +401,7 @@ func (s *Server) serverRoutes(mux *http.ServeMux) {
 	//	@Description	REPLICAOF host port, or REPLICAOF NO ONE with no_one; node is required.
 	//	@Tags			server
 	//	@Produce		json
-	//	@Param			body	body		ReplicaOfRequest	true	"Request body"
+	//	@Param			body	ReplicaOfRequest	true	"Request body"
 	//	@Param			node	query		string				true	"Node address"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
 	//	@Failure		default	{object}	ErrorResponse

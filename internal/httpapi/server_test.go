@@ -117,7 +117,7 @@ func doBody(t *testing.T, srv *httptest.Server, method, path, token, contentType
 		t.Fatalf("decode %s: %v", body, err)
 	}
 
-	if resp.Header.Get("X-Request-Id") == "" {
+	if resp.Header.Get("X-Request-ID") == "" {
 		t.Error("X-Request-Id header is missing")
 	}
 

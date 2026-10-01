@@ -97,7 +97,7 @@ func TestOpenAPIIsPublic(t *testing.T) {
 		"/api/v1/openapi.json": "application/json",
 		"/api/v1/openapi.yaml": "application/yaml",
 	} {
-		req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL+path, nil)
+		req, err := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL+path, http.NoBody)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -138,7 +138,7 @@ func TestSwaggerUI(t *testing.T) {
 	t.Cleanup(srv.Close)
 
 	get := func(path string) (int, string, string) {
-		req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL+path, nil)
+		req, _ := http.NewRequestWithContext(t.Context(), http.MethodGet, srv.URL+path, http.NoBody)
 
 		resp, err := (&http.Client{CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}).Do(req)
 		if err != nil {

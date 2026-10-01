@@ -51,7 +51,7 @@ func (s *Server) pubsubRoutes(mux *http.ServeMux) {
 	//	@Description	PUBLISH, or SPUBLISH with sharded; returns the number of receivers on the node that got the message.
 	//	@Tags			pubsub
 	//	@Produce		json
-	//	@Param			body	body		PublishRequest	true	"Request body"
+	//	@Param			body	PublishRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth

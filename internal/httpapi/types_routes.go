@@ -123,7 +123,7 @@ func (s *Server) stringRoutes(mux *http.ServeMux) {
 	//	@Description	SET with optional TTL and NX/XX/KEEPTTL/GET.
 	//	@Tags			strings
 	//	@Produce		json
-	//	@Param			body	body		StringSetRequest	true	"Request body"
+	//	@Param			body	StringSetRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -144,7 +144,7 @@ func (s *Server) stringRoutes(mux *http.ServeMux) {
 	//	@Description	SET per key in one pipeline; keys may belong to different cluster slots.
 	//	@Tags			strings
 	//	@Produce		json
-	//	@Param			body	body		StringMSetRequest	true	"Request body"
+	//	@Param			body	StringMSetRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.PipelineResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -172,7 +172,7 @@ func (s *Server) stringRoutes(mux *http.ServeMux) {
 	//	@Description	INCRBY, or INCRBYFLOAT for a fractional by; by defaults to 1.
 	//	@Tags			strings
 	//	@Produce		json
-	//	@Param			body	body		IncrRequest	true	"Request body"
+	//	@Param			body	IncrRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -189,7 +189,7 @@ func (s *Server) stringRoutes(mux *http.ServeMux) {
 	//	@Description	APPEND.
 	//	@Tags			strings
 	//	@Produce		json
-	//	@Param			body	body		KeyValue	true	"Request body"
+	//	@Param			body	KeyValue	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -202,7 +202,7 @@ func (s *Server) stringRoutes(mux *http.ServeMux) {
 	//	@Description	SETRANGE.
 	//	@Tags			strings
 	//	@Produce		json
-	//	@Param			body	body		StringSetRangeRequest	true	"Request body"
+	//	@Param			body	StringSetRangeRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -215,7 +215,7 @@ func (s *Server) stringRoutes(mux *http.ServeMux) {
 	//	@Description	GETEX with ttl_ms or persist, GETDEL with delete.
 	//	@Tags			strings
 	//	@Produce		json
-	//	@Param			body	body		StringGetExRequest	true	"Request body"
+	//	@Param			body	StringGetExRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -363,7 +363,7 @@ func (s *Server) hashRoutes(mux *http.ServeMux) {
 	//	@Description	HSET, or HSETNX with nx and a single field.
 	//	@Tags			hashes
 	//	@Produce		json
-	//	@Param			body	body		HashSetRequest	true	"Request body"
+	//	@Param			body	HashSetRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -393,7 +393,7 @@ func (s *Server) hashRoutes(mux *http.ServeMux) {
 	//	@Description	HINCRBY, or HINCRBYFLOAT for a fractional by.
 	//	@Tags			hashes
 	//	@Produce		json
-	//	@Param			body	body		HashIncrRequest	true	"Request body"
+	//	@Param			body	HashIncrRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -413,7 +413,7 @@ func (s *Server) hashRoutes(mux *http.ServeMux) {
 	//	@Description	HPEXPIRE (redis 7.4+).
 	//	@Tags			hashes
 	//	@Produce		json
-	//	@Param			body	body		HashTTLRequest	true	"Request body"
+	//	@Param			body	HashTTLRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -542,7 +542,7 @@ func (s *Server) listRoutes(mux *http.ServeMux) {
 	//	@Description	LPUSH/RPUSH, or LPUSHX/RPUSHX with only_existing.
 	//	@Tags			lists
 	//	@Produce		json
-	//	@Param			body	body		ListPushRequest	true	"Request body"
+	//	@Param			body	ListPushRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -565,7 +565,7 @@ func (s *Server) listRoutes(mux *http.ServeMux) {
 	//	@Description	LPOP/RPOP; with block_ms BLPOP/BRPOP waits for an element, pass ?timeout accordingly.
 	//	@Tags			lists
 	//	@Produce		json
-	//	@Param			body	body		ListPopRequest	true	"Request body"
+	//	@Param			body	ListPopRequest	true	"Request body"
 	//	@Param			timeout	query		string			false	"Request timeout for blocking pops"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
@@ -592,7 +592,7 @@ func (s *Server) listRoutes(mux *http.ServeMux) {
 	//	@Description	LSET.
 	//	@Tags			lists
 	//	@Produce		json
-	//	@Param			body	body		ListSetRequest	true	"Request body"
+	//	@Param			body	ListSetRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -605,7 +605,7 @@ func (s *Server) listRoutes(mux *http.ServeMux) {
 	//	@Description	LREM: count 0 removes all occurrences, negative counts from the tail.
 	//	@Tags			lists
 	//	@Produce		json
-	//	@Param			body	body		ListRemoveRequest	true	"Request body"
+	//	@Param			body	ListRemoveRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -618,7 +618,7 @@ func (s *Server) listRoutes(mux *http.ServeMux) {
 	//	@Description	LTRIM.
 	//	@Tags			lists
 	//	@Produce		json
-	//	@Param			body	body		ListTrimRequest	true	"Request body"
+	//	@Param			body	ListTrimRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -631,7 +631,7 @@ func (s *Server) listRoutes(mux *http.ServeMux) {
 	//	@Description	LINSERT before or after the pivot.
 	//	@Tags			lists
 	//	@Produce		json
-	//	@Param			body	body		ListInsertRequest	true	"Request body"
+	//	@Param			body	ListInsertRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -649,7 +649,7 @@ func (s *Server) listRoutes(mux *http.ServeMux) {
 	//	@Description	LMOVE, or BLMOVE with block_ms.
 	//	@Tags			lists
 	//	@Produce		json
-	//	@Param			body	body		ListMoveRequest	true	"Request body"
+	//	@Param			body	ListMoveRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -819,7 +819,7 @@ func (s *Server) setRoutes(mux *http.ServeMux) {
 	//	@Description	SADD.
 	//	@Tags			sets
 	//	@Produce		json
-	//	@Param			body	body		MembersRequest	true	"Request body"
+	//	@Param			body	MembersRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -829,7 +829,7 @@ func (s *Server) setRoutes(mux *http.ServeMux) {
 	//	@Description	SREM.
 	//	@Tags			sets
 	//	@Produce		json
-	//	@Param			body	body		MembersRequest	true	"Request body"
+	//	@Param			body	MembersRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -840,7 +840,7 @@ func (s *Server) setRoutes(mux *http.ServeMux) {
 	//	@Description	SPOP.
 	//	@Tags			sets
 	//	@Produce		json
-	//	@Param			body	body		CountRequest	true	"Request body"
+	//	@Param			body	CountRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -853,7 +853,7 @@ func (s *Server) setRoutes(mux *http.ServeMux) {
 	//	@Description	SMOVE.
 	//	@Tags			sets
 	//	@Produce		json
-	//	@Param			body	body		SetMoveRequest	true	"Request body"
+	//	@Param			body	SetMoveRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -869,7 +869,7 @@ func (s *Server) setRoutes(mux *http.ServeMux) {
 		//	@Description	SINTER, SUNION or SDIFF; with destination the result is stored (S*STORE). In cluster keys must hash to the same slot.
 		//	@Tags			sets
 		//	@Produce		json
-		//	@Param			body	body		KeysOpRequest	true	"Request body"
+		//	@Param			body	KeysOpRequest	true	"Request body"
 		//	@Success		200		{object}	Response{result=service.CommandResult}
 		//	@Failure		default	{object}	ErrorResponse
 		//	@Security		BearerAuth
@@ -1029,7 +1029,7 @@ func (s *Server) zsetRoutes(mux *http.ServeMux) {
 	//	@Description	ZADD with NX/XX/GT/LT/CH.
 	//	@Tags			sorted sets
 	//	@Produce		json
-	//	@Param			body	body		ZSetAddRequest	true	"Request body"
+	//	@Param			body	ZSetAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -1051,7 +1051,7 @@ func (s *Server) zsetRoutes(mux *http.ServeMux) {
 	//	@Description	ZREM.
 	//	@Tags			sorted sets
 	//	@Produce		json
-	//	@Param			body	body		MembersRequest	true	"Request body"
+	//	@Param			body	MembersRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -1068,7 +1068,7 @@ func (s *Server) zsetRoutes(mux *http.ServeMux) {
 	//	@Description	ZINCRBY.
 	//	@Tags			sorted sets
 	//	@Produce		json
-	//	@Param			body	body		ZSetIncrRequest	true	"Request body"
+	//	@Param			body	ZSetIncrRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -1083,7 +1083,7 @@ func (s *Server) zsetRoutes(mux *http.ServeMux) {
 	//	@Description	ZPOPMIN/ZPOPMAX, or BZPOPMIN/BZPOPMAX with block_ms.
 	//	@Tags			sorted sets
 	//	@Produce		json
-	//	@Param			body	body		ZSetPopRequest	true	"Request body"
+	//	@Param			body	ZSetPopRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -1105,7 +1105,7 @@ func (s *Server) zsetRoutes(mux *http.ServeMux) {
 	//	@Description	ZREMRANGEBYRANK, ZREMRANGEBYSCORE or ZREMRANGEBYLEX.
 	//	@Tags			sorted sets
 	//	@Produce		json
-	//	@Param			body	body		ZSetRemoveRangeRequest	true	"Request body"
+	//	@Param			body	ZSetRemoveRangeRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -1125,7 +1125,7 @@ func (s *Server) zsetRoutes(mux *http.ServeMux) {
 		//	@Description	ZINTER, ZUNION or ZDIFF with weights and aggregate; with destination the result is stored (Z*STORE).
 		//	@Tags			sorted sets
 		//	@Produce		json
-		//	@Param			body	body		ZSetOpRequest	true	"Request body"
+		//	@Param			body	ZSetOpRequest	true	"Request body"
 		//	@Success		200		{object}	Response{result=service.CommandResult}
 		//	@Failure		default	{object}	ErrorResponse
 		//	@Security		BearerAuth

@@ -9,7 +9,7 @@ LDFLAGS := -s -w -X main.version=$(VERSION)
 
 COMPOSE := docker compose
 PROFILES := --profile standalone --profile cluster --profile sentinel
-REDIS_IMAGES ?= redis:7.4 redis:8 valkey/valkey:8
+REDIS_IMAGES ?= redis:7.4 redis:8 valkey/valkey:8 valkey/valkey:9
 
 .PHONY: build run test lint tidy docker docker-login docker-push swagger up down test-integration test-matrix
 

@@ -33,7 +33,7 @@ curl -N 'localhost:8080/api/v1/pubsub/subscribe?channel=news'
   and **Swagger UI** for the whole API.
 - RESP2 and RESP3, TLS, Prometheus metrics, a single static binary and a 40 MB Alpine-based container image.
 
-Tested against Redis 7.4, Redis 8 and Valkey 8 in every topology.
+Tested against Redis 7.4, Redis 8, Valkey 8 and Valkey 9 in every topology.
 
 ## Quick start
 
@@ -50,7 +50,7 @@ open http://localhost:8080/api/v1/docs/   # Swagger UI
 make down
 ```
 
-Use `REDIS_IMAGE=valkey/valkey:8 make up` to run Valkey instead of Redis.
+Use `REDIS_IMAGE=valkey/valkey:9 make up` to run Valkey instead of Redis.
 
 ### Docker
 
@@ -302,7 +302,7 @@ curl 'host-a:8080/api/v1/keys/export?format=value' \
 
 The `dump` format (default) keeps every type, including module types, but `RESTORE` accepts
 dumps only from servers with a compatible RDB version: a Redis 8 dump can't be restored on
-Valkey 8 or Redis 7.4. The `value` format supports strings, lists, sets, hashes, sorted sets,
+Valkey 8, Valkey 9 or Redis 7.4, and Valkey 9 dumps can't be restored on Redis 8. The `value` format supports strings, lists, sets, hashes, sorted sets,
 streams (without consumer groups) and JSON, and works between any versions. TTLs are kept.
 
 ### Web UI
@@ -745,7 +745,7 @@ make test               # unit tests
 make lint               # golangci-lint
 make up / make down     # local cluster and redigate from compose.yaml
 make test-integration   # integration tests inside the compose network
-make test-matrix        # Redis 7.4, Redis 8, Valkey 8 and RESP2
+make test-matrix        # Redis 7.4, Redis 8, Valkey 8, Valkey 9 and RESP2
 make swagger            # regenerate the OpenAPI specification
 make docker             # local image redigate:<version>
 ```

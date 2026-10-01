@@ -21,6 +21,7 @@ var version = "dev" //nolint:gochecknoglobals // build-time variable
 
 func main() {
 	showVersion := flag.Bool("version", false, "print version and exit")
+
 	flag.Parse()
 
 	if *showVersion {

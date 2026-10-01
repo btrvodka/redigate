@@ -46,7 +46,7 @@ func (s *Server) bitmapRoutes(mux *http.ServeMux) {
 	//	@Description	SETBIT.
 	//	@Tags			bitmaps
 	//	@Produce		json
-	//	@Param			body	body		BitmapSetBitRequest	true	"Request body"
+	//	@Param			body	BitmapSetBitRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -94,7 +94,7 @@ func (s *Server) bitmapRoutes(mux *http.ServeMux) {
 	//	@Description	BITOP.
 	//	@Tags			bitmaps
 	//	@Produce		json
-	//	@Param			body	body		BitmapOpRequest	true	"Request body"
+	//	@Param			body	BitmapOpRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -111,7 +111,7 @@ func (s *Server) bitmapRoutes(mux *http.ServeMux) {
 	//	@Description	PFADD.
 	//	@Tags			hyperloglog
 	//	@Produce		json
-	//	@Param			body	body		HLLAddRequest	true	"Request body"
+	//	@Param			body	HLLAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -136,7 +136,7 @@ func (s *Server) bitmapRoutes(mux *http.ServeMux) {
 	//	@Description	PFMERGE.
 	//	@Tags			hyperloglog
 	//	@Produce		json
-	//	@Param			body	body		HLLMergeRequest	true	"Request body"
+	//	@Param			body	HLLMergeRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -183,7 +183,7 @@ func (s *Server) geoRoutes(mux *http.ServeMux) {
 	//	@Description	GEOADD.
 	//	@Tags			geo
 	//	@Produce		json
-	//	@Param			body	body		GeoAddRequest	true	"Request body"
+	//	@Param			body	GeoAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -246,7 +246,7 @@ func (s *Server) geoRoutes(mux *http.ServeMux) {
 	//	@Description	GEOSEARCH, or GEOSEARCHSTORE with destination: a center (from_member or longitude and latitude) and a shape (radius or width and height).
 	//	@Tags			geo
 	//	@Produce		json
-	//	@Param			body	body		GeoSearchRequest	true	"Request body"
+	//	@Param			body	GeoSearchRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth

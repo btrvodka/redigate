@@ -32,7 +32,7 @@ func openStream(t *testing.T, srv *httptest.Server, path, token string) *sseStre
 	ctx, cancel := context.WithCancel(t.Context())
 	t.Cleanup(cancel)
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, srv.URL+path, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, srv.URL+path, http.NoBody)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,6 +139,7 @@ func TestStreamTail(t *testing.T) {
 
 	// Without ids the tail starts after the last entry.
 	stream := openStream(t, srv, "/api/v1/streams/tail?key=st", "")
+
 	time.Sleep(200 * time.Millisecond)
 
 	value(t, srv, http.MethodPost, "/api/v1/streams/add", `{"key": "st", "id": "2-0", "fields": [{"field": "new", "value": "2"}]}`)

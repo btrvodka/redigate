@@ -37,7 +37,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: [redis:7.4, redis:8, valkey/valkey:8]
+        image: [redis:7.4, redis:8, valkey/valkey:8, valkey/valkey:9]
         protocol: [3]
         include:
           - image: redis:8

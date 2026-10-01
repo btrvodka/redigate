@@ -27,6 +27,7 @@ func Run(ctx context.Context, cfg *config.Config, logger *slog.Logger, version s
 	}
 
 	collector := metrics.New()
+
 	redisx.SetLogger(logger)
 
 	redisClient, err := redisx.New(ctx, cfg.Redis, logger, collector)

@@ -190,6 +190,7 @@ func SplitArgs(line string) (Args, error) {
 				switch {
 				case c == '\\' && i+1 < len(line) && line[i+1] == '\'':
 					i++
+
 					current = append(current, '\'')
 				case c == '\'':
 					if i+1 < len(line) && !isSpace(line[i+1]) {

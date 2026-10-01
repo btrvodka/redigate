@@ -49,9 +49,22 @@ linters:
 
 formatters:
   enable:
-    - gofumpt
+    - gofmt
     - goimports
+    - gci
+  exclusions:
+    generated: lax
+    paths:
+      - ignore_test.go
+      - internal/iso
+      - tests
+      - third_party$
+      - builtin$
+      - examples$
   settings:
-    goimports:
-      local-prefixes:
-        - github.com/btrvodka/redigate
+    gci:
+      custom-order: true
+      sections:
+        - standard
+        - default
+        - prefix(github.com/btrvodka/redigate)

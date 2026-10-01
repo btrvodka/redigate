@@ -2,7 +2,7 @@
 #
 #   make up                  # redis cluster (3 masters, 3 replicas) + redigate on 127.0.0.1:8080
 #   make test-integration    # integration tests inside the compose network
-#   REDIS_IMAGE=valkey/valkey:8 make test-integration
+#   REDIS_IMAGE=valkey/valkey:9 make test-integration
 #
 # Standalone and sentinel deployments are used by integration tests.
 # Nodes use static addresses: cluster and sentinel announce them to clients,

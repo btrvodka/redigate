@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"path/filepath"
 	"regexp"
-	"slices"
 	"strings"
 	"testing"
 	"time"
@@ -21,35 +21,74 @@ import (
 	"github.com/btrvodka/redigate/internal/service"
 )
 
-// TestReadmeDocumentsAllRoutes keeps the endpoint reference of README.md in sync with the code.
-func TestReadmeDocumentsAllRoutes(t *testing.T) {
+// TestDocumentationLinks checks relative links and anchors between README, CONTRIBUTING and docs/.
+func TestDocumentationLinks(t *testing.T) {
 	t.Parallel()
 
-	readme, err := os.ReadFile("../../README.md")
+	files, err := filepath.Glob("../../docs/*.md")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	documented := make(map[string]bool)
-	for _, match := range regexp.MustCompile("`((?:GET|POST|PUT|DELETE) /api/v1/[^`?]*)`").FindAllStringSubmatch(string(readme), -1) {
-		documented[match[1]] = true
-	}
+	files = append(files, "../../README.md", "../../CONTRIBUTING.md")
 
-	cfg := &config.Config{Limits: config.Limits{MaxStreams: 1}}
-	routes := httpapi.New(cfg, nil, slog.New(slog.DiscardHandler), noopMetrics{}, "test").Routes()
-	slices.Sort(routes)
+	codeBlock := regexp.MustCompile("(?s)```.*?```")
+	link := regexp.MustCompile(`\[[^\]]*\]\(([^)\s]+)\)`)
 
-	for _, route := range routes {
-		if !documented[route] {
-			t.Errorf("route is not documented in README.md: %s", route)
+	for _, file := range files {
+		raw, err := os.ReadFile(file)
+		if err != nil {
+			t.Fatal(err)
 		}
 
-		delete(documented, route)
+		text := codeBlock.ReplaceAllString(string(raw), "")
+
+		for _, m := range link.FindAllStringSubmatch(text, -1) {
+			target := m[1]
+			if strings.Contains(target, "://") || strings.HasPrefix(target, "mailto:") {
+				continue
+			}
+
+			path, anchor, _ := strings.Cut(target, "#")
+
+			resolved := file
+			if path != "" {
+				resolved = filepath.Join(filepath.Dir(file), path)
+			}
+
+			if _, err := os.Stat(resolved); err != nil {
+				t.Errorf("%s: broken link %s", file, target)
+
+				continue
+			}
+
+			if anchor != "" && !hasHeading(t, resolved, anchor) {
+				t.Errorf("%s: no heading for %s", file, target)
+			}
+		}
+	}
+}
+
+// hasHeading reports whether a markdown file has a heading with the GitHub anchor.
+func hasHeading(t *testing.T, file, anchor string) bool {
+	t.Helper()
+
+	raw, err := os.ReadFile(file)
+	if err != nil {
+		t.Fatal(err)
 	}
 
-	for route := range documented {
-		t.Errorf("README.md documents an unknown route: %s", route)
+	heading := regexp.MustCompile(`(?m)^#{1,6}\s+(.+)$`)
+	punctuation := regexp.MustCompile(`[^\p{L}\p{N}\s_-]`)
+
+	for _, m := range heading.FindAllStringSubmatch(string(raw), -1) {
+		slug := punctuation.ReplaceAllString(strings.ToLower(strings.TrimSpace(m[1])), "")
+		if strings.ReplaceAll(slug, " ", "-") == anchor {
+			return true
+		}
 	}
+
+	return false
 }
 
 // TestOpenAPIDocumentsAllRoutes keeps the generated specification in sync with the

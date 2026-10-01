@@ -1,0 +1,181 @@
+# Local Redis deployments for development and integration tests.
+#
+#   make up                  # redis cluster (3 masters, 3 replicas) + redigate on 127.0.0.1:8080
+#   make test-integration    # integration tests inside the compose network
+#   REDIS_IMAGE=valkey/valkey:8 make test-integration
+#
+# Standalone and sentinel deployments are used by integration tests.
+# Nodes use static addresses: cluster and sentinel announce them to clients,
+# so everything that talks to redis runs inside this network.
+
+x-redis: &redis
+  image: ${REDIS_IMAGE:-redis:8}
+  healthcheck:
+    test: ["CMD", "redis-cli", "-p", "6379", "ping"]
+    interval: 1s
+    timeout: 3s
+    retries: 30
+
+x-cluster-node: &cluster-node
+  <<: *redis
+  profiles: [cluster, test]
+  command: >-
+    redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes.conf
+    --cluster-node-timeout 5000 --save "" --appendonly no
+
+x-sentinel: &sentinel
+  image: ${REDIS_IMAGE:-redis:8}
+  profiles: [sentinel, test]
+  depends_on:
+    sentinel-master:
+      condition: service_healthy
+  command:
+    - sh
+    - -c
+    - |
+      printf '%s\n' \
+        'port 26379' \
+        'sentinel monitor mymaster 172.30.0.30 6379 2' \
+        'sentinel down-after-milliseconds mymaster 5000' \
+        'sentinel failover-timeout mymaster 10000' > /tmp/sentinel.conf
+      exec redis-sentinel /tmp/sentinel.conf
+  healthcheck:
+    test: ["CMD", "redis-cli", "-p", "26379", "ping"]
+    interval: 1s
+    timeout: 3s
+    retries: 30
+
+x-redigate: &redigate
+  image: redigate:dev
+  build: .
+  environment: &redigate-env
+    HTTP_ADDR: ":8080"
+    API_TOKEN: ${API_TOKEN:-}
+    # Development only: the API is published on the loopback interface of the host.
+    ALLOW_INSECURE: "true"
+    LOG_LEVEL: ${LOG_LEVEL:-info}
+
+services:
+  # --- standalone: a master with one replica ---
+  standalone:
+    <<: *redis
+    profiles: [standalone, test]
+    command: redis-server --save "" --appendonly no
+    networks: { redis: { ipv4_address: 172.30.0.10 } }
+
+  standalone-replica:
+    <<: *redis
+    profiles: [standalone, test]
+    command: redis-server --save "" --appendonly no --replicaof 172.30.0.10 6379
+    depends_on: { standalone: { condition: service_healthy } }
+    networks: { redis: { ipv4_address: 172.30.0.11 } }
+
+  # --- cluster: 3 masters, 3 replicas ---
+  cluster-1: { <<: *cluster-node, networks: { redis: { ipv4_address: 172.30.0.21 } } }
+  cluster-2: { <<: *cluster-node, networks: { redis: { ipv4_address: 172.30.0.22 } } }
+  cluster-3: { <<: *cluster-node, networks: { redis: { ipv4_address: 172.30.0.23 } } }
+  cluster-4: { <<: *cluster-node, networks: { redis: { ipv4_address: 172.30.0.24 } } }
+  cluster-5: { <<: *cluster-node, networks: { redis: { ipv4_address: 172.30.0.25 } } }
+  cluster-6: { <<: *cluster-node, networks: { redis: { ipv4_address: 172.30.0.26 } } }
+
+  cluster-init:
+    image: ${REDIS_IMAGE:-redis:8}
+    profiles: [cluster, test]
+    depends_on:
+      cluster-1: { condition: service_healthy }
+      cluster-2: { condition: service_healthy }
+      cluster-3: { condition: service_healthy }
+      cluster-4: { condition: service_healthy }
+      cluster-5: { condition: service_healthy }
+      cluster-6: { condition: service_healthy }
+    networks: [redis]
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        if redis-cli -h 172.30.0.21 cluster info | grep -q 'cluster_state:ok' \
+          && [ "$$(redis-cli -h 172.30.0.21 cluster slots | grep -c '^172.30')" -eq 6 ]; then
+          echo 'cluster is already created'
+          exit 0
+        fi
+        redis-cli --cluster create \
+          172.30.0.21:6379 172.30.0.22:6379 172.30.0.23:6379 \
+          172.30.0.24:6379 172.30.0.25:6379 172.30.0.26:6379 \
+          --cluster-replicas 1 --cluster-yes
+        until redis-cli -h 172.30.0.21 cluster info | grep -q 'cluster_state:ok'; do sleep 0.5; done
+        # Replicas appear in CLUSTER SLOTS only after they connect to their masters.
+        until [ "$$(redis-cli -h 172.30.0.21 cluster slots | grep -c '^172.30')" -eq 6 ]; do sleep 0.5; done
+
+  # --- sentinel: a master, 2 replicas, 3 sentinels ---
+  sentinel-master:
+    <<: *redis
+    profiles: [sentinel, test]
+    command: redis-server --save "" --appendonly no
+    networks: { redis: { ipv4_address: 172.30.0.30 } }
+
+  sentinel-replica-1:
+    <<: *redis
+    profiles: [sentinel, test]
+    command: redis-server --save "" --appendonly no --replicaof 172.30.0.30 6379
+    depends_on: { sentinel-master: { condition: service_healthy } }
+    networks: { redis: { ipv4_address: 172.30.0.31 } }
+
+  sentinel-replica-2:
+    <<: *redis
+    profiles: [sentinel, test]
+    command: redis-server --save "" --appendonly no --replicaof 172.30.0.30 6379
+    depends_on: { sentinel-master: { condition: service_healthy } }
+    networks: { redis: { ipv4_address: 172.30.0.32 } }
+
+  sentinel-1: { <<: *sentinel, networks: { redis: { ipv4_address: 172.30.0.35 } } }
+  sentinel-2: { <<: *sentinel, networks: { redis: { ipv4_address: 172.30.0.36 } } }
+  sentinel-3: { <<: *sentinel, networks: { redis: { ipv4_address: 172.30.0.37 } } }
+
+  # --- redigate connected to the cluster ---
+  redigate:
+    <<: *redigate
+    profiles: [cluster]
+    environment:
+      <<: *redigate-env
+      REDIS_URL: redis://172.30.0.21:6379,172.30.0.22:6379,172.30.0.23:6379
+    depends_on: { cluster-init: { condition: service_completed_successfully } }
+    ports: ["127.0.0.1:8080:8080"]
+    networks: [redis]
+
+  # --- integration tests ---
+  tests:
+    image: golang:1.27-alpine
+    profiles: [test]
+    working_dir: /src
+    volumes:
+      - .:/src
+      - go-mod:/go/pkg/mod
+      - go-build:/root/.cache/go-build
+    environment:
+      CGO_ENABLED: "0"
+      REDIGATE_TEST_STANDALONE: redis://172.30.0.10:6379
+      REDIGATE_TEST_CLUSTER: redis://172.30.0.21:6379,172.30.0.22:6379,172.30.0.23:6379
+      REDIGATE_TEST_SENTINEL: redis+sentinel://172.30.0.35:26379,172.30.0.36:26379,172.30.0.37:26379/mymaster
+      REDIGATE_TEST_IMAGE: ${REDIS_IMAGE:-redis:8}
+      REDIGATE_TEST_PROTOCOL: ${REDIS_PROTOCOL:-3}
+    command: go test -tags integration -count=1 ${TEST_FLAGS:-} ./internal/integration/...
+    depends_on:
+      standalone-replica: { condition: service_healthy }
+      cluster-init: { condition: service_completed_successfully }
+      sentinel-replica-1: { condition: service_healthy }
+      sentinel-replica-2: { condition: service_healthy }
+      sentinel-1: { condition: service_healthy }
+      sentinel-2: { condition: service_healthy }
+      sentinel-3: { condition: service_healthy }
+    networks: [redis]
+
+networks:
+  redis:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+
+volumes:
+  go-mod:
+  go-build:

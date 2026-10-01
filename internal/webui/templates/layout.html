@@ -1,0 +1,36 @@
+{{define "page"}}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Title}} · redigate</title>
+<link rel="stylesheet" href="/ui/static/style.css">
+<script src="/ui/static/htmx.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/ui/">redigate</a>
+  {{if .Nav}}
+  <nav>
+    <a href="/ui/"{{if eq .Nav "overview"}} class="active"{{end}}>Overview</a>
+    <a href="/ui/keys"{{if eq .Nav "keys"}} class="active"{{end}}>Keys</a>
+    <a href="/ui/console"{{if eq .Nav "console"}} class="active"{{end}}>Console</a>
+    <a href="/api/v1/docs/">API docs</a>
+  </nav>
+  <div class="status">
+    <span class="badge">{{.Topology}}</span>
+    {{if .ReadOnly}}<span class="badge warn" title="Commands that change data are denied">read-only</span>{{end}}
+    {{if .AuthOn}}<form method="post" action="/ui/logout"><button class="link">Sign out</button></form>{{end}}
+  </div>
+  {{end}}
+</header>
+<main>
+  {{if .Error}}<div class="error">{{.Error}}</div>{{end}}
+  {{template "content" .}}
+</main>
+<footer>redigate {{.Version}} · <a href="/api/v1/docs/">HTTP API</a></footer>
+</body>
+</html>
+{{end}}
+
+{{define "error"}}<div class="error">{{.}}</div>{{end}}

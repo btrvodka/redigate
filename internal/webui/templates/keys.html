@@ -1,0 +1,91 @@
+{{define "content"}}
+<form class="filters" hx-get="/ui/keys/rows" hx-target="#rows" hx-trigger="submit, load" hx-indicator="#keys-loading">
+  <input name="match" placeholder="Pattern, e.g. user:*" value="{{.Data.Filter.Match}}">
+  <select name="type">
+    <option value="">Any type</option>
+    {{range .Data.Types}}<option value="{{.}}"{{if eq . $.Data.Filter.Type}} selected{{end}}>{{.}}</option>{{end}}
+  </select>
+  {{if ne .Topology "cluster"}}<input name="db" type="number" min="0" placeholder="db" value="{{.Data.Filter.DB}}" class="narrow">{{end}}
+  <button>Search</button>
+  <span id="keys-loading" class="htmx-indicator muted">Loading…</span>
+</form>
+
+<div class="split">
+  <div class="list scroll">
+    <table class="keys">
+      <thead><tr><th>Key</th><th>Type</th><th>TTL</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <section id="key-view" class="view"><p class="muted">Select a key to see its value.</p></section>
+</div>
+{{end}}
+
+{{define "rows"}}
+{{range .Rows}}
+<tr id="{{.ID}}" class="clickable" hx-get="/ui/key?k={{.Param}}{{if $.Filter.DB}}&db={{$.Filter.DB}}{{end}}" hx-target="#key-view">
+  <td class="key{{if .Binary}} binary{{end}}"{{if .Binary}} title="Binary key, shown as base64"{{end}}>{{.Display}}</td>
+  <td><span class="type">{{.Type}}</span></td>
+  <td class="muted">{{.TTL}}</td>
+</tr>
+{{end}}
+{{if .Next}}
+<tr hx-get="/ui/keys/rows?{{.Filter.Query}}&cursor={{.Next}}" hx-trigger="revealed" hx-swap="outerHTML">
+  <td colspan="3" class="muted">Loading…</td>
+</tr>
+{{else if and .First (not .Rows)}}
+<tr><td colspan="3" class="muted">No keys found.</td></tr>
+{{end}}
+{{end}}
+
+{{define "key"}}
+<header class="key-head">
+  <h2 class="key{{if .Key.Binary}} binary{{end}}">{{.Key.Display}}</h2>
+  <div class="meta">
+    <span class="type">{{.Value.Type}}</span>
+    <span>TTL: {{.Key.TTL}}</span>
+    {{with .Value.Length}}<span>length: {{.}}</span>{{end}}
+    {{with .Value.Encoding}}<span>encoding: {{.}}</span>{{end}}
+    {{with .Value.MemoryBytes}}<span>memory: {{.}} B</span>{{end}}
+  </div>
+</header>
+
+{{if .Message}}<p class="notice">{{.Message}}</p>{{end}}
+
+{{if not .ReadOnly}}
+<div class="actions">
+  <form hx-put="/ui/key/ttl?k={{.Key.Param}}{{if .DB}}&db={{.DB}}{{end}}" hx-target="#key-view">
+    <input name="ttl" placeholder="TTL: 60, 1h30m, empty to persist" class="wide">
+    <button>Set TTL</button>
+  </form>
+  <button class="danger" hx-delete="/ui/key?k={{.Key.Param}}{{if .DB}}&db={{.DB}}{{end}}" hx-target="#key-view"
+          hx-confirm="Delete this key?">Delete</button>
+</div>
+{{end}}
+
+{{if .Value.Unsupported}}
+<p class="muted">This type has no viewer, use the console.</p>
+{{else if eq .Kind "string"}}
+<pre class="value">{{index .Items 0}}</pre>
+{{else if eq .Kind "items"}}
+<table><tbody>{{range $i, $item := .Items}}<tr><td class="muted index">{{$i}}</td><td class="value">{{$item}}</td></tr>{{end}}</tbody></table>
+{{else if eq .Kind "pairs"}}
+<table><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>{{range .Pairs}}<tr><td>{{.Name}}</td><td class="value">{{.Value}}</td></tr>{{end}}</tbody></table>
+{{else if eq .Kind "scored"}}
+<table><thead><tr><th>Member</th><th>Score</th></tr></thead><tbody>{{range .Scored}}<tr><td class="value">{{.Name}}</td><td>{{.Value}}</td></tr>{{end}}</tbody></table>
+{{else if eq .Kind "stream"}}
+<table><thead><tr><th>ID</th><th>Fields</th></tr></thead><tbody>
+{{range .Entries}}<tr><td><code>{{.ID}}</code></td><td>{{range .Fields}}<div><span class="muted">{{.Name}}:</span> <span class="value">{{.Value}}</span></div>{{end}}</td></tr>{{end}}
+</tbody></table>
+{{else}}
+<pre class="value">{{.Pretty}}</pre>
+{{end}}
+{{if .Value.Truncated}}<p class="muted">The value is truncated to MAX_RESPONSE_ITEMS elements.</p>{{end}}
+{{end}}
+
+{{define "deleted"}}
+<p class="notice">The key is deleted.</p>
+<hx-partial hx-target="#{{.}}" hx-swap="delete"></hx-partial>
+{{end}}
+
+{{define "gone"}}<p class="muted">{{.}}</p>{{end}}

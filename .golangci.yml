@@ -1,0 +1,57 @@
+version: "2"
+
+run:
+  build-tags:
+    - integration
+
+linters:
+  default: standard
+  enable:
+    - bodyclose
+    - copyloopvar
+    - cyclop
+    - errname
+    - errorlint
+    - gocritic
+    - gosec
+    - misspell
+    - nilerr
+    - noctx
+    - nolintlint
+    - perfsprint
+    - prealloc
+    - revive
+    - sloglint
+    - unconvert
+    - unparam
+    - usestdlibvars
+  settings:
+    cyclop:
+      max-complexity: 15
+    revive:
+      rules:
+        - name: exported
+          disabled: true
+  exclusions:
+    presets:
+      - comments
+      - std-error-handling
+    rules:
+      # Route registration functions are flat lists of handlers.
+      - path: _routes\.go
+        linters:
+          - cyclop
+      - path: _test\.go
+        linters:
+          - cyclop
+          - gosec
+          - unparam
+
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/btrvodka/redigate

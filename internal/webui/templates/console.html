@@ -1,0 +1,29 @@
+{{define "content"}}
+<form class="console" hx-post="/ui/console" hx-target="#log" hx-swap="afterbegin" hx-indicator="#console-loading"
+      hx-on:htmx:after:request="this.command.select()">
+  <input name="command" autofocus autocomplete="off" spellcheck="false" placeholder='SET key "a value"' class="command">
+  <select name="target" title="Where the command goes">
+    <option value="auto">by key</option>
+    <option value="masters">all masters</option>
+    <option value="replicas">all replicas</option>
+    <option value="all">all data nodes</option>
+    {{if eq .Topology "sentinel"}}<option value="sentinels">sentinels</option>{{end}}
+  </select>
+  <select name="node" title="A specific node, overrides the target">
+    <option value="">any node</option>
+    {{range .Data.Nodes}}<option value="{{.Addr}}">{{.Addr}} ({{.Role}})</option>{{end}}
+  </select>
+  {{if ne .Topology "cluster"}}<input name="db" type="number" min="0" placeholder="db" class="narrow">{{end}}
+  <button>Run</button>
+  <span id="console-loading" class="htmx-indicator muted">Running…</span>
+</form>
+<p class="muted hint">Quote arguments with spaces like in redis-cli. Binary values are shown as {"base64": "..."}.</p>
+<div id="log"></div>
+{{end}}
+
+{{define "result"}}
+<article class="result">
+  <header><code>{{.Command}}</code> <span class="muted">{{with .Where}}{{.}} · {{end}}{{.Duration}}</span></header>
+  {{if .Error}}<pre class="error">{{.Error}}</pre>{{else}}<pre>{{.Output}}</pre>{{end}}
+</article>
+{{end}}

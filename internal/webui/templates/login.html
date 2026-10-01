@@ -1,0 +1,8 @@
+{{define "content"}}
+<form class="card login" method="post" action="/ui/login">
+  <h1>Sign in</h1>
+  <p class="muted">Use API_TOKEN for full access or API_READONLY_TOKEN for read-only access.</p>
+  <input type="password" name="token" placeholder="Token" autofocus required autocomplete="current-password">
+  <button>Sign in</button>
+</form>
+{{end}}

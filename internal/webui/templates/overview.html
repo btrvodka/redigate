@@ -1,0 +1,30 @@
+{{define "content"}}
+{{with .Data}}
+<section class="cards">
+  <div class="card"><div class="label">Topology</div><div class="value">{{.Topology.Topology}}</div></div>
+  {{if .Topology.SentinelMaster}}<div class="card"><div class="label">Sentinel master</div><div class="value">{{.Topology.SentinelMaster}}</div></div>{{end}}
+  <div class="card"><div class="label">Nodes</div><div class="value">{{len .Nodes}}</div></div>
+  <div class="card"><div class="label">Keys on masters</div><div class="value">{{.TotalKeys}}</div></div>
+</section>
+
+<h2>Nodes</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Address</th><th>Role</th><th>Status</th><th>Version</th><th>Memory</th><th>Clients</th><th>Keys</th></tr></thead>
+  <tbody>
+  {{range .Nodes}}
+  <tr>
+    <td><code>{{.Addr}}</code></td>
+    <td><span class="role role-{{.Role}}">{{.Role}}</span></td>
+    <td>{{if .OK}}<span class="ok">● {{ms .LatencyMS}} ms</span>{{else}}<span class="fail" title="{{.Error}}">● down</span>{{end}}</td>
+    <td>{{.Version}}</td>
+    <td>{{.Memory}}</td>
+    <td>{{.Clients}}</td>
+    <td>{{.Keys}}</td>
+  </tr>
+  {{end}}
+  </tbody>
+</table>
+</div>
+{{end}}
+{{end}}

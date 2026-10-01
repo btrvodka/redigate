@@ -83,6 +83,15 @@ func TestShapeTimeSeries(t *testing.T) {
 		}
 	}
 
+	// Series of several shards arrive in any order.
+	unordered := []any{
+		[]any{"ts:b", []any{}, []any{}},
+		[]any{"ts:a", []any{}, []any{}},
+	}
+	if got := ShapeTSMulti(false)(unordered).([]any); got[0].(map[any]any)["key"] != "ts:a" {
+		t.Errorf("RESP2 series must be sorted by key: %#v", got)
+	}
+
 	mget := ShapeTSMulti(true)(map[any]any{"ts:a": []any{map[any]any{}, []any{int64(2000), 2.5}}})
 	if !reflect.DeepEqual(mget, []any{map[any]any{"key": "ts:a", "labels": map[any]any{}, "sample": samples[1]}}) {
 		t.Errorf("RESP3 mget: %#v", mget)

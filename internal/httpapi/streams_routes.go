@@ -160,7 +160,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XADD with optional MAXLEN/MINID trimming.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamAddRequest	true	"Request body"
+	//	@Param			request	body		StreamAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -187,7 +187,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XDEL.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamIDsRequest	true	"Request body"
+	//	@Param			request	body		StreamIDsRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -204,7 +204,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XTRIM by maxlen or minid.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamTrimRequest	true	"Request body"
+	//	@Param			request	body		StreamTrimRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -239,7 +239,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XGROUP CREATE.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamGroupRequest	true	"Request body"
+	//	@Param			request	body		StreamGroupRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -251,7 +251,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XGROUP SETID.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamGroupRequest	true	"Request body"
+	//	@Param			request	body		StreamGroupRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -277,7 +277,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XGROUP CREATECONSUMER.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamConsumerRequest	true	"Request body"
+	//	@Param			request	body		StreamConsumerRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -356,7 +356,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XREAD: ids default to "0" (from the start), "$" waits for new entries; block_ms waits, pass ?timeout accordingly. Result: [{"stream", "entries"}].
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamReadRequest	true	"Request body"
+	//	@Param			request	body		StreamReadRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -368,7 +368,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XREADGROUP: ids default to ">" (new entries).
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamReadRequest	true	"Request body"
+	//	@Param			request	body		StreamReadRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -381,7 +381,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XACK.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamIDsRequest	true	"Request body"
+	//	@Param			request	body		StreamIDsRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -406,7 +406,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XCLAIM.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamClaimRequest	true	"Request body"
+	//	@Param			request	body		StreamClaimRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -425,7 +425,7 @@ func (s *Server) streamRoutes(mux *http.ServeMux) {
 	//	@Description	XAUTOCLAIM: {"next", "entries", "deleted"}.
 	//	@Tags			streams
 	//	@Produce		json
-	//	@Param			body	StreamClaimRequest	true	"Request body"
+	//	@Param			request	body		StreamClaimRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth

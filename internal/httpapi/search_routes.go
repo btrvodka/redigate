@@ -106,7 +106,7 @@ func (s *Server) searchRoutes(mux *http.ServeMux) {
 	//	@Description	FT.CREATE.
 	//	@Tags			search
 	//	@Produce		json
-	//	@Param			body	SearchCreateIndexRequest	true	"Request body"
+	//	@Param			request	body		SearchCreateIndexRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -153,7 +153,7 @@ func (s *Server) searchRoutes(mux *http.ServeMux) {
 	//	@Tags			search
 	//	@Produce		json
 	//	@Param			index	path		string		true	"Index"
-	//	@Param			body	SchemaField	true	"Request body"
+	//	@Param			request	body		SchemaField	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -177,7 +177,7 @@ func (s *Server) searchRoutes(mux *http.ServeMux) {
 	//	@Tags			search
 	//	@Produce		json
 	//	@Param			index	path		string			true	"Index"
-	//	@Param			body	SearchRequest	true	"Request body"
+	//	@Param			request	body		SearchRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -226,7 +226,7 @@ func (s *Server) searchRoutes(mux *http.ServeMux) {
 	//	@Tags			search
 	//	@Produce		json
 	//	@Param			index	path		string					true	"Index"
-	//	@Param			body	SearchAggregateRequest	true	"Request body"
+	//	@Param			request	body		SearchAggregateRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -250,7 +250,7 @@ func (s *Server) searchRoutes(mux *http.ServeMux) {
 	//	@Tags			search
 	//	@Produce		json
 	//	@Param			index	path		string	true	"Index"
-	//	@Param			query	string	false	"Query, default *"
+	//	@Param			query	query		string	false	"Query, default *"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -283,7 +283,7 @@ func (s *Server) searchRoutes(mux *http.ServeMux) {
 	//	@Description	FT.ALIASUPDATE.
 	//	@Tags			search
 	//	@Produce		json
-	//	@Param			body	SearchAliasRequest	true	"Request body"
+	//	@Param			request	body		SearchAliasRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth

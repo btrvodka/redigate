@@ -138,7 +138,7 @@ func (s *Server) jsonRoutes(mux *http.ServeMux) {
 	//	@Description	JSON.SET.
 	//	@Tags			json
 	//	@Produce		json
-	//	@Param			body	JSONSetRequest	true	"Request body"
+	//	@Param			request	body		JSONSetRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -157,7 +157,7 @@ func (s *Server) jsonRoutes(mux *http.ServeMux) {
 	//	@Description	JSON.MERGE (RFC 7386 merge patch).
 	//	@Tags			json
 	//	@Produce		json
-	//	@Param			body	JSONSetRequest	true	"Request body"
+	//	@Param			request	body		JSONSetRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -175,7 +175,7 @@ func (s *Server) jsonRoutes(mux *http.ServeMux) {
 	//	@Description	JSON.NUMINCRBY.
 	//	@Tags			json
 	//	@Produce		json
-	//	@Param			body	JSONNumIncrRequest	true	"Request body"
+	//	@Param			request	body		JSONNumIncrRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -209,7 +209,7 @@ func (s *Server) jsonRoutes(mux *http.ServeMux) {
 	//	@Description	JSON.ARRAPPEND.
 	//	@Tags			json
 	//	@Produce		json
-	//	@Param			body	JSONArrayRequest	true	"Request body"
+	//	@Param			request	body		JSONArrayRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -223,7 +223,7 @@ func (s *Server) jsonRoutes(mux *http.ServeMux) {
 	//	@Description	JSON.ARRINSERT.
 	//	@Tags			json
 	//	@Produce		json
-	//	@Param			body	JSONArrayRequest	true	"Request body"
+	//	@Param			request	body		JSONArrayRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -244,7 +244,7 @@ func (s *Server) jsonRoutes(mux *http.ServeMux) {
 	//	@Description	JSON.ARRPOP.
 	//	@Tags			json
 	//	@Produce		json
-	//	@Param			body	JSONArrayRequest	true	"Request body"
+	//	@Param			request	body		JSONArrayRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -263,7 +263,7 @@ func (s *Server) jsonRoutes(mux *http.ServeMux) {
 		//	@Description	JSON.TOGGLE or JSON.CLEAR.
 		//	@Tags			json
 		//	@Produce		json
-		//	@Param			body	JSONPathRequest	true	"Request body"
+		//	@Param			request	body		JSONPathRequest	true	"Request body"
 		//	@Success		200		{object}	Response{result=service.CommandResult}
 		//	@Failure		default	{object}	ErrorResponse
 		//	@Security		BearerAuth

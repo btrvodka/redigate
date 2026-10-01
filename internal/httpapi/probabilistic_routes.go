@@ -59,7 +59,7 @@ func (s *Server) bloomRoutes(mux *http.ServeMux) {
 	//	@Description	BF.RESERVE.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	BloomReserveRequest	true	"Request body"
+	//	@Param			request	body		BloomReserveRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -78,7 +78,7 @@ func (s *Server) bloomRoutes(mux *http.ServeMux) {
 	//	@Description	BF.MADD.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	ItemsRequest	true	"Request body"
+	//	@Param			request	body		ItemsRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -130,7 +130,7 @@ func (s *Server) bloomRoutes(mux *http.ServeMux) {
 	//	@Description	CF.RESERVE.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	CuckooReserveRequest	true	"Request body"
+	//	@Param			request	body		CuckooReserveRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -150,7 +150,7 @@ func (s *Server) bloomRoutes(mux *http.ServeMux) {
 	//	@Description	CF.INSERT, or CF.INSERTNX with nx.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	CuckooAddRequest	true	"Request body"
+	//	@Param			request	body		CuckooAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -194,7 +194,7 @@ func (s *Server) bloomRoutes(mux *http.ServeMux) {
 	//	@Description	CF.DEL.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	CuckooItemRequest	true	"Request body"
+	//	@Param			request	body		CuckooItemRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -264,7 +264,7 @@ func (s *Server) sketchRoutes(mux *http.ServeMux) {
 	//	@Description	CMS.INITBYDIM with width and depth or CMS.INITBYPROB with error and probability.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	CMSInitRequest	true	"Request body"
+	//	@Param			request	body		CMSInitRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -297,7 +297,7 @@ func (s *Server) sketchRoutes(mux *http.ServeMux) {
 	//	@Description	CMS.INCRBY.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	ItemIncrementsRequest	true	"Request body"
+	//	@Param			request	body		ItemIncrementsRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -336,7 +336,7 @@ func (s *Server) sketchRoutes(mux *http.ServeMux) {
 	//	@Description	CMS.MERGE.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	MergeRequest	true	"Request body"
+	//	@Param			request	body		MergeRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -363,7 +363,7 @@ func (s *Server) sketchRoutes(mux *http.ServeMux) {
 	//	@Description	TOPK.RESERVE.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	TopKReserveRequest	true	"Request body"
+	//	@Param			request	body		TopKReserveRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -384,7 +384,7 @@ func (s *Server) sketchRoutes(mux *http.ServeMux) {
 	//	@Description	TOPK.ADD: items pushed out of the top.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	ItemsRequest	true	"Request body"
+	//	@Param			request	body		ItemsRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -396,7 +396,7 @@ func (s *Server) sketchRoutes(mux *http.ServeMux) {
 	//	@Description	TOPK.INCRBY.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	ItemIncrementsRequest	true	"Request body"
+	//	@Param			request	body		ItemIncrementsRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -490,7 +490,7 @@ func (s *Server) tdigestRoutes(route func(string, jsonHandler)) {
 	//	@Description	TDIGEST.CREATE.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	TDigestCreateRequest	true	"Request body"
+	//	@Param			request	body		TDigestCreateRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -504,7 +504,7 @@ func (s *Server) tdigestRoutes(route func(string, jsonHandler)) {
 	//	@Description	TDIGEST.ADD.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	TDigestAddRequest	true	"Request body"
+	//	@Param			request	body		TDigestAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -593,7 +593,7 @@ func (s *Server) tdigestRoutes(route func(string, jsonHandler)) {
 	//	@Description	TDIGEST.RESET.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	KeyRequest	true	"Request body"
+	//	@Param			request	body		KeyRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -606,7 +606,7 @@ func (s *Server) tdigestRoutes(route func(string, jsonHandler)) {
 	//	@Description	TDIGEST.MERGE.
 	//	@Tags			probabilistic
 	//	@Produce		json
-	//	@Param			body	TDigestMergeRequest	true	"Request body"
+	//	@Param			request	body		TDigestMergeRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -674,7 +674,7 @@ func (s *Server) vectorsetRoutes(mux *http.ServeMux) {
 	//	@Description	VADD with optional REDUCE, quantization, EF, M and attributes.
 	//	@Tags			vector sets
 	//	@Produce		json
-	//	@Param			body	VectorAddRequest	true	"Request body"
+	//	@Param			request	body		VectorAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -707,7 +707,7 @@ func (s *Server) vectorsetRoutes(mux *http.ServeMux) {
 	//	@Description	VSIM by vector or element: [{"element", "score"}] ordered by score.
 	//	@Tags			vector sets
 	//	@Produce		json
-	//	@Param			body	VectorSearchRequest	true	"Request body"
+	//	@Param			request	body		VectorSearchRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -799,7 +799,7 @@ func (s *Server) vectorsetRoutes(mux *http.ServeMux) {
 	//	@Description	VSETATTR; an empty object removes attributes.
 	//	@Tags			vector sets
 	//	@Produce		json
-	//	@Param			body	VectorAttributesRequest	true	"Request body"
+	//	@Param			request	body		VectorAttributesRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth

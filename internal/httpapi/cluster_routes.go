@@ -100,7 +100,7 @@ func (s *Server) clusterRoutes(mux *http.ServeMux) {
 	//	@Description	CLUSTER FAILOVER on the replica given by node.
 	//	@Tags			cluster
 	//	@Produce		json
-	//	@Param			body	ClusterFailoverRequest	true	"Request body"
+	//	@Param			request	body		ClusterFailoverRequest	true	"Request body"
 	//	@Param			node	query		string					true	"Replica address"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
@@ -117,7 +117,7 @@ func (s *Server) clusterRoutes(mux *http.ServeMux) {
 	//	@Description	CLUSTER MEET on node (any master by default).
 	//	@Tags			cluster
 	//	@Produce		json
-	//	@Param			body	ClusterMeetRequest	true	"Request body"
+	//	@Param			request	body		ClusterMeetRequest	true	"Request body"
 	//	@Param			node	query		string				false	"Node address"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
@@ -134,7 +134,7 @@ func (s *Server) clusterRoutes(mux *http.ServeMux) {
 	//	@Description	CLUSTER FORGET on every node.
 	//	@Tags			cluster
 	//	@Produce		json
-	//	@Param			body	ClusterForgetRequest	true	"Request body"
+	//	@Param			request	body		ClusterForgetRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -150,7 +150,7 @@ func (s *Server) clusterRoutes(mux *http.ServeMux) {
 	//	@Description	CLUSTER REPLICATE on node.
 	//	@Tags			cluster
 	//	@Produce		json
-	//	@Param			body	ClusterReplicateRequest	true	"Request body"
+	//	@Param			request	body		ClusterReplicateRequest	true	"Request body"
 	//	@Param			node	query		string					true	"Node address"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
@@ -167,7 +167,7 @@ func (s *Server) clusterRoutes(mux *http.ServeMux) {
 	//	@Description	CLUSTER RESET SOFT or HARD on node.
 	//	@Tags			cluster
 	//	@Produce		json
-	//	@Param			body	ClusterResetRequest	true	"Request body"
+	//	@Param			request	body		ClusterResetRequest	true	"Request body"
 	//	@Param			node	query		string				true	"Node address"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
@@ -186,7 +186,7 @@ func (s *Server) clusterRoutes(mux *http.ServeMux) {
 		//	@Description	CLUSTER ADDSLOTS/DELSLOTS, or the *RANGE variants with ranges, on node.
 		//	@Tags			cluster
 		//	@Produce		json
-		//	@Param			body	ClusterSlotsRequest	true	"Request body"
+		//	@Param			request	body		ClusterSlotsRequest	true	"Request body"
 		//	@Param			node	query		string				true	"Node address"
 		//	@Success		200		{object}	Response{result=service.CommandResult}
 		//	@Failure		default	{object}	ErrorResponse
@@ -206,7 +206,7 @@ func (s *Server) clusterRoutes(mux *http.ServeMux) {
 	//	@Description	CLUSTER SETSLOT on node: importing, migrating, stable or node.
 	//	@Tags			cluster
 	//	@Produce		json
-	//	@Param			body	ClusterSetSlotRequest	true	"Request body"
+	//	@Param			request	body		ClusterSetSlotRequest	true	"Request body"
 	//	@Param			node	query		string					true	"Node address"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse

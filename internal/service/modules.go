@@ -172,13 +172,14 @@ func ShapeTSMulti(single bool) func(any) any {
 					add(key, series[0], series[len(series)-1])
 				}
 			}
-
-			slices.SortFunc(out, func(a, b any) int {
-				return cmp.Compare(fmt.Sprint(a.(map[any]any)["key"]), fmt.Sprint(b.(map[any]any)["key"])) //nolint:forcetypeassert // built above
-			})
 		default:
 			return reply
 		}
+
+		// The order of series is unspecified (RESP3 maps, shards of a cluster): sort by key.
+		slices.SortFunc(out, func(a, b any) int {
+			return cmp.Compare(fmt.Sprint(a.(map[any]any)["key"]), fmt.Sprint(b.(map[any]any)["key"])) //nolint:forcetypeassert // built above
+		})
 
 		return out
 	}

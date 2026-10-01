@@ -97,7 +97,7 @@ func (s *Server) transferRoutes(mux *http.ServeMux) {
 	//	@Tags			keys
 	//	@Accept			application/x-ndjson
 	//	@Produce		json
-	//	@Param			body	string	true	"NDJSON"
+	//	@Param			request	body		string	true	"NDJSON"
 	//	@Param			replace	query		bool	false	"Overwrite existing keys"
 	//	@Param			db		query		int		false	"Database"
 	//	@Success		200		{object}	Response{result=service.ImportResult}

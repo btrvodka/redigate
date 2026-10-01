@@ -12,7 +12,7 @@ func (s *Server) scriptRoutes(mux *http.ServeMux) {
 	//	@Description	EVAL or EVALSHA; read_only uses EVAL_RO/EVALSHA_RO. Keys route the call in cluster and must hash to the same slot.
 	//	@Tags			scripts
 	//	@Produce		json
-	//	@Param			body	EvalRequest	true	"Request body"
+	//	@Param			request	body		EvalRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -38,7 +38,7 @@ func (s *Server) scriptRoutes(mux *http.ServeMux) {
 	//	@Description	SCRIPT LOAD on every data node, returns the sha per node.
 	//	@Tags			scripts
 	//	@Produce		json
-	//	@Param			body	ScriptLoadRequest	true	"Request body"
+	//	@Param			request	body		ScriptLoadRequest	true	"Request body"
 	//	@Param			node	query		string				false	"Node address"
 	//	@Param			target	query		string				false	"masters, replicas, all or sentinels"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
@@ -137,7 +137,7 @@ func (s *Server) scriptRoutes(mux *http.ServeMux) {
 	//	@Description	FUNCTION LOAD on every master.
 	//	@Tags			functions
 	//	@Produce		json
-	//	@Param			body	FunctionLoadRequest	true	"Request body"
+	//	@Param			request	body		FunctionLoadRequest	true	"Request body"
 	//	@Param			node	query		string				false	"Node address"
 	//	@Param			target	query		string				false	"masters, replicas, all or sentinels"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
@@ -215,7 +215,7 @@ func (s *Server) scriptRoutes(mux *http.ServeMux) {
 	//	@Description	FUNCTION RESTORE on every master; policy is append, replace or flush.
 	//	@Tags			functions
 	//	@Produce		json
-	//	@Param			body	FunctionRestoreRequest	true	"Request body"
+	//	@Param			request	body		FunctionRestoreRequest	true	"Request body"
 	//	@Param			node	query		string					false	"Node address"
 	//	@Param			target	query		string					false	"masters, replicas, all or sentinels"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
@@ -234,7 +234,7 @@ func (s *Server) scriptRoutes(mux *http.ServeMux) {
 	//	@Description	FCALL, or FCALL_RO with read_only.
 	//	@Tags			functions
 	//	@Produce		json
-	//	@Param			body	FunctionCallRequest	true	"Request body"
+	//	@Param			request	body		FunctionCallRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -330,7 +330,7 @@ func (s *Server) aclRoutes(mux *http.ServeMux) {
 	//	@Tags			acl
 	//	@Produce		json
 	//	@Param			user	path		string				true	"User"
-	//	@Param			body	ACLSetUserRequest	true	"Request body"
+	//	@Param			request	body		ACLSetUserRequest	true	"Request body"
 	//	@Param			node	query		string				false	"Node address"
 	//	@Param			target	query		string				false	"masters, replicas, all or sentinels"
 	//	@Success		200		{object}	Response{result=service.FanOutResult}
@@ -413,7 +413,7 @@ func (s *Server) aclRoutes(mux *http.ServeMux) {
 	//	@Description	ACL DRYRUN: "OK" or the reason of the denial.
 	//	@Tags			acl
 	//	@Produce		json
-	//	@Param			body	ACLDryRunRequest	true	"Request body"
+	//	@Param			request	body		ACLDryRunRequest	true	"Request body"
 	//	@Param			node	query		string				false	"Node address"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse

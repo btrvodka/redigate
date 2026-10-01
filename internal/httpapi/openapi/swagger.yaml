@@ -2081,7 +2081,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ACLDryRunRequest'
@@ -2425,7 +2425,7 @@ paths:
         type: string
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ACLSetUserRequest'
@@ -2526,7 +2526,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.BitmapSetBitRequest'
@@ -2599,7 +2599,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.BitmapOpRequest'
@@ -2676,7 +2676,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.BloomReserveRequest'
@@ -2707,7 +2707,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ItemsRequest'
@@ -2837,7 +2837,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClusterSlotsRequest'
@@ -2874,7 +2874,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClusterSlotsRequest'
@@ -2910,7 +2910,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClusterFailoverRequest'
@@ -2946,7 +2946,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClusterForgetRequest'
@@ -3036,7 +3036,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClusterMeetRequest'
@@ -3100,7 +3100,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClusterReplicateRequest'
@@ -3136,7 +3136,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClusterResetRequest'
@@ -3172,7 +3172,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClusterSetSlotRequest'
@@ -3301,7 +3301,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.CMSInitRequest'
@@ -3332,7 +3332,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ItemIncrementsRequest'
@@ -3393,7 +3393,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.MergeRequest'
@@ -3468,7 +3468,7 @@ paths:
       parameters:
       - description: JSON or a command line
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.CommandRequest'
@@ -3519,7 +3519,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.CuckooReserveRequest'
@@ -3550,7 +3550,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.CuckooAddRequest'
@@ -3616,7 +3616,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.CuckooItemRequest'
@@ -3792,7 +3792,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.FunctionLoadRequest'
@@ -3831,7 +3831,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.FunctionCallRequest'
@@ -3962,7 +3962,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.FunctionRestoreRequest'
@@ -4034,7 +4034,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.GeoAddRequest'
@@ -4186,7 +4186,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.GeoSearchRequest'
@@ -4246,7 +4246,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.HashSetRequest'
@@ -4387,7 +4387,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.HashIncrRequest'
@@ -4527,7 +4527,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.HashTTLRequest'
@@ -4558,7 +4558,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.HLLAddRequest'
@@ -4622,7 +4622,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.HLLMergeRequest'
@@ -4722,7 +4722,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.JSONSetRequest'
@@ -4753,7 +4753,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.JSONArrayRequest'
@@ -4784,7 +4784,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.JSONArrayRequest'
@@ -4849,7 +4849,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.JSONArrayRequest'
@@ -4880,7 +4880,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.JSONPathRequest'
@@ -4911,7 +4911,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.JSONSetRequest'
@@ -4979,7 +4979,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.JSONNumIncrRequest'
@@ -5044,7 +5044,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.JSONPathRequest'
@@ -5197,7 +5197,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeyCopyRequest'
@@ -5229,7 +5229,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeysDeleteRequest'
@@ -5373,7 +5373,7 @@ paths:
       parameters:
       - description: NDJSON
         in: body
-        name: body
+        name: request
         required: true
         schema:
           type: string
@@ -5466,7 +5466,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeyRenameRequest'
@@ -5497,7 +5497,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeyRestoreRequest'
@@ -5620,7 +5620,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeyTTLRequest'
@@ -5783,7 +5783,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ListSetRequest'
@@ -5814,7 +5814,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ListInsertRequest'
@@ -5875,7 +5875,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ListMoveRequest'
@@ -5907,7 +5907,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ListPopRequest'
@@ -5989,7 +5989,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ListPushRequest'
@@ -6021,7 +6021,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ListRemoveRequest'
@@ -6052,7 +6052,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ListTrimRequest'
@@ -6177,7 +6177,7 @@ paths:
       parameters:
       - description: JSON or command lines
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.PipelineRequest'
@@ -6323,7 +6323,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.PublishRequest'
@@ -6407,7 +6407,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.EvalRequest'
@@ -6549,7 +6549,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ScriptLoadRequest'
@@ -6588,7 +6588,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.SearchAliasRequest'
@@ -6672,7 +6672,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.SearchCreateIndexRequest'
@@ -6771,7 +6771,7 @@ paths:
         type: string
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.SearchAggregateRequest'
@@ -6841,7 +6841,7 @@ paths:
         type: string
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.SchemaField'
@@ -6877,7 +6877,7 @@ paths:
         type: string
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.SearchRequest'
@@ -7046,7 +7046,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClientKillRequest'
@@ -7085,7 +7085,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ClientPauseRequest'
@@ -7254,7 +7254,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ConfigSetRequest'
@@ -7667,7 +7667,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ReplicaOfRequest'
@@ -7769,7 +7769,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ShutdownRequest'
@@ -7907,7 +7907,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.MembersRequest'
@@ -7977,7 +7977,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeysOpRequest'
@@ -8009,7 +8009,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeysOpRequest'
@@ -8070,7 +8070,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.SetMoveRequest'
@@ -8101,7 +8101,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.CountRequest'
@@ -8166,7 +8166,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.MembersRequest'
@@ -8240,7 +8240,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeysOpRequest'
@@ -8317,7 +8317,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamIDsRequest'
@@ -8348,7 +8348,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamAddRequest'
@@ -8379,7 +8379,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamClaimRequest'
@@ -8410,7 +8410,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamClaimRequest'
@@ -8514,7 +8514,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamConsumerRequest'
@@ -8545,7 +8545,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamIDsRequest'
@@ -8639,7 +8639,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamGroupRequest'
@@ -8669,7 +8669,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamGroupRequest'
@@ -8821,7 +8821,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamReadRequest'
@@ -8852,7 +8852,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamReadRequest'
@@ -8944,7 +8944,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StreamTrimRequest'
@@ -9004,7 +9004,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StringSetRequest'
@@ -9035,7 +9035,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeyValue'
@@ -9066,7 +9066,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StringGetExRequest'
@@ -9097,7 +9097,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.IncrRequest'
@@ -9192,7 +9192,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StringMSetRequest'
@@ -9260,7 +9260,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.StringSetRangeRequest'
@@ -9291,7 +9291,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TDigestCreateRequest'
@@ -9322,7 +9322,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TDigestAddRequest'
@@ -9569,7 +9569,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TDigestMergeRequest'
@@ -9734,7 +9734,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.KeyRequest'
@@ -9855,7 +9855,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TimeSeriesCreateRequest'
@@ -9885,7 +9885,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TimeSeriesCreateRequest'
@@ -9916,7 +9916,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TimeSeriesAddRequest'
@@ -9947,7 +9947,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TimeSeriesDeleteRequest'
@@ -10012,7 +10012,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TimeSeriesIncrRequest'
@@ -10074,7 +10074,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TimeSeriesMAddRequest'
@@ -10337,7 +10337,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TimeSeriesRuleRequest'
@@ -10368,7 +10368,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.TopKReserveRequest'
@@ -10399,7 +10399,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ItemsRequest'
@@ -10430,7 +10430,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ItemIncrementsRequest'
@@ -10588,7 +10588,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.VectorAddRequest'
@@ -10653,7 +10653,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.VectorAttributesRequest'
@@ -10913,7 +10913,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.VectorSearchRequest'
@@ -11003,7 +11003,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ZSetAddRequest'
@@ -11035,7 +11035,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ZSetOpRequest'
@@ -11066,7 +11066,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ZSetIncrRequest'
@@ -11098,7 +11098,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ZSetOpRequest'
@@ -11167,7 +11167,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ZSetPopRequest'
@@ -11237,7 +11237,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.MembersRequest'
@@ -11268,7 +11268,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ZSetRemoveRangeRequest'
@@ -11380,7 +11380,7 @@ paths:
       parameters:
       - description: Request body
         in: body
-        name: body
+        name: request
         required: true
         schema:
           $ref: '#/definitions/httpapi.ZSetOpRequest'

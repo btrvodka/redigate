@@ -132,13 +132,30 @@ func TestCluster(t *testing.T) {
 	})
 
 	t.Run("failover", func(t *testing.T) {
-		master := get[service.KeySlotResult](t, e, http.MethodGet, "/api/v1/cluster/keyslot?key={f}k", "").Master
-		replica := replicaOf(t, e, master)
+		keyslotMaster := func() string {
+			return get[service.KeySlotResult](t, e, http.MethodGet, "/api/v1/cluster/keyslot?key={f}k", "").Master
+		}
 
-		value(t, e, http.MethodPost, "/api/v1/cluster/failover?node="+replica, "")
+		replica := replicaOf(t, e, keyslotMaster())
 
-		eventually(t, 30*time.Second, "failover", func() bool {
-			return get[service.KeySlotResult](t, e, http.MethodGet, "/api/v1/cluster/keyslot?key={f}k", "").Master == replica
+		// A manual failover is silently aborted while the replica is still syncing.
+		waitReplicaSynced(t, e, replica)
+
+		// An aborted manual failover is not retried by redis: issue it again until it happens.
+		var issued time.Time
+
+		eventually(t, 60*time.Second, "failover", func() bool {
+			if keyslotMaster() == replica {
+				return true
+			}
+
+			if time.Since(issued) > 10*time.Second {
+				value(t, e, http.MethodPost, "/api/v1/cluster/failover?node="+replica, "")
+
+				issued = time.Now()
+			}
+
+			return false
 		})
 
 		// Routing follows the new master.
@@ -147,6 +164,23 @@ func TestCluster(t *testing.T) {
 		if got := value(t, e, http.MethodPost, "/api/v1/command", "GET {f}k"); got != "after-failover" {
 			t.Errorf("GET after failover = %v", got)
 		}
+	})
+}
+
+// waitReplicaSynced waits until the replica has a working link to its master.
+func waitReplicaSynced(t *testing.T, e *env, replica string) {
+	t.Helper()
+
+	eventually(t, 60*time.Second, "replica "+replica+" in sync", func() bool {
+		info := get[service.FanOutResult](t, e, http.MethodGet, "/api/v1/server/info?section=replication&node="+replica, "")
+		if len(info.Nodes) != 1 {
+			return false
+		}
+
+		sections, _ := info.Nodes[0].Value.(map[string]any)
+		replication, _ := sections["replication"].(map[string]any)
+
+		return replication["master_link_status"] == "up" && replication["master_sync_in_progress"] == "0"
 	})
 }
 
@@ -183,17 +217,23 @@ func TestSentinel(t *testing.T) {
 		sentinel := nodesByRole(topology, "sentinel")[0]
 		master := nodesByRole(topology, "master")[0]
 
-		addr := value(t, e, http.MethodPost, "/api/v1/command?node="+sentinel, "SENTINEL get-master-addr-by-name mymaster")
-		if got := fmt.Sprintf("%v:%v", addr.([]any)[0], addr.([]any)[1]); got != master {
-			t.Fatalf("sentinel master = %s, topology master = %s", got, master)
-		}
+		eventually(t, 30*time.Second, "sentinel and topology agree on the master", func() bool {
+			addr, _ := value(t, e, http.MethodPost, "/api/v1/command?node="+sentinel, "SENTINEL get-master-addr-by-name mymaster").([]any)
+
+			return len(addr) == 2 && fmt.Sprintf("%v:%v", addr[0], addr[1]) == master //nolint:mnd // host and port
+		})
 
 		// Sentinel commands are unknown to the data nodes command table: read-only access is denied.
 		expectStatus(t, e, readOnlyToken, http.MethodPost, "/api/v1/command?node="+sentinel, "SENTINEL masters", http.StatusForbidden, "FORBIDDEN")
 
-		value(t, e, http.MethodPost, "/api/v1/command?node="+sentinel, "SENTINEL failover mymaster")
+		// INPROG (a previous failover is running) and NOGOODSLAVE (replicas are not ready yet) are transient.
+		eventually(t, 60*time.Second, "sentinel accepts the failover", func() bool {
+			status, _ := e.do(t, http.MethodPost, "/api/v1/command?node="+sentinel, fullToken, "SENTINEL failover mymaster")
 
-		eventually(t, 30*time.Second, "sentinel failover", func() bool {
+			return status == http.StatusOK
+		})
+
+		eventually(t, 60*time.Second, "sentinel failover", func() bool {
 			current := get[service.TopologyInfo](t, e, http.MethodGet, "/api/v1/topology", "")
 			masters := nodesByRole(current, "master")
 

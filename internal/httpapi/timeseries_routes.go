@@ -97,7 +97,7 @@ func (s *Server) timeseriesRoutes(mux *http.ServeMux) {
 	//	@Description	TS.CREATE.
 	//	@Tags			timeseries
 	//	@Produce		json
-	//	@Param			body	TimeSeriesCreateRequest	true	"Request body"
+	//	@Param			request	body		TimeSeriesCreateRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -109,7 +109,7 @@ func (s *Server) timeseriesRoutes(mux *http.ServeMux) {
 	//	@Description	TS.ALTER.
 	//	@Tags			timeseries
 	//	@Produce		json
-	//	@Param			body	TimeSeriesCreateRequest	true	"Request body"
+	//	@Param			request	body		TimeSeriesCreateRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -122,7 +122,7 @@ func (s *Server) timeseriesRoutes(mux *http.ServeMux) {
 	//	@Description	TS.ADD; the series is created with the given options when missing.
 	//	@Tags			timeseries
 	//	@Produce		json
-	//	@Param			body	TimeSeriesAddRequest	true	"Request body"
+	//	@Param			request	body		TimeSeriesAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -144,7 +144,7 @@ func (s *Server) timeseriesRoutes(mux *http.ServeMux) {
 	//	@Description	TS.ADD per sample in one pipeline; series may be in different cluster slots.
 	//	@Tags			timeseries
 	//	@Produce		json
-	//	@Param			body	TimeSeriesMAddRequest	true	"Request body"
+	//	@Param			request	body		TimeSeriesMAddRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.PipelineResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -173,7 +173,7 @@ func (s *Server) timeseriesRoutes(mux *http.ServeMux) {
 	//	@Description	TS.INCRBY, or TS.DECRBY for a negative by.
 	//	@Tags			timeseries
 	//	@Produce		json
-	//	@Param			body	TimeSeriesIncrRequest	true	"Request body"
+	//	@Param			request	body		TimeSeriesIncrRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -302,7 +302,7 @@ func (s *Server) timeseriesRoutes(mux *http.ServeMux) {
 	//	@Description	TS.DEL in [from, to].
 	//	@Tags			timeseries
 	//	@Produce		json
-	//	@Param			body	TimeSeriesDeleteRequest	true	"Request body"
+	//	@Param			request	body		TimeSeriesDeleteRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -315,7 +315,7 @@ func (s *Server) timeseriesRoutes(mux *http.ServeMux) {
 	//	@Description	TS.CREATERULE.
 	//	@Tags			timeseries
 	//	@Produce		json
-	//	@Param			body	TimeSeriesRuleRequest	true	"Request body"
+	//	@Param			request	body		TimeSeriesRuleRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth

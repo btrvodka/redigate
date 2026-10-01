@@ -141,7 +141,7 @@ func (s *Server) keyRoutes(mux *http.ServeMux) {
 	//	@Description	Unlinks every key matching the pattern on every master. When the request is about to time out it stops and returns a cursor to continue from.
 	//	@Tags			keys
 	//	@Produce		json
-	//	@Param			body	KeysDeleteRequest	true	"Request body"
+	//	@Param			request	body		KeysDeleteRequest	true	"Request body"
 	//	@Param			db		query		int					false	"Database"
 	//	@Success		200		{object}	Response{result=service.DeleteByPatternResult}
 	//	@Failure		default	{object}	ErrorResponse
@@ -206,7 +206,7 @@ func (s *Server) keyRoutes(mux *http.ServeMux) {
 	//	@Description	PEXPIRE with ttl_ms or PEXPIREAT with expire_at_ms; condition is NX, XX, GT or LT.
 	//	@Tags			keys
 	//	@Produce		json
-	//	@Param			body	KeyTTLRequest	true	"Request body"
+	//	@Param			request	body		KeyTTLRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -256,7 +256,7 @@ func (s *Server) keyRoutes(mux *http.ServeMux) {
 	//	@Description	RENAME or RENAMENX; in cluster keys must hash to the same slot.
 	//	@Tags			keys
 	//	@Produce		json
-	//	@Param			body	KeyRenameRequest	true	"Request body"
+	//	@Param			request	body		KeyRenameRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -284,7 +284,7 @@ func (s *Server) keyRoutes(mux *http.ServeMux) {
 	//	@Description	COPY.
 	//	@Tags			keys
 	//	@Produce		json
-	//	@Param			body	KeyCopyRequest	true	"Request body"
+	//	@Param			request	body		KeyCopyRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth
@@ -333,7 +333,7 @@ func (s *Server) keyRoutes(mux *http.ServeMux) {
 	//	@Description	RESTORE a value from GET /keys/dump.
 	//	@Tags			keys
 	//	@Produce		json
-	//	@Param			body	KeyRestoreRequest	true	"Request body"
+	//	@Param			request	body		KeyRestoreRequest	true	"Request body"
 	//	@Success		200		{object}	Response{result=service.CommandResult}
 	//	@Failure		default	{object}	ErrorResponse
 	//	@Security		BearerAuth

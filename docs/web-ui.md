@@ -49,3 +49,5 @@ Swagger UI at `/api/v1/docs/` renders the OpenAPI specification of every endpoin
 sends requests to the same server: with authentication enabled press Authorize and enter
 `Bearer <token>`. The specification itself is at `/api/v1/openapi.json` and
 `/api/v1/openapi.yaml` and needs no token.
+
+![Swagger UI with the general group of operations](images/api-docs.png)

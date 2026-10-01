@@ -42,7 +42,7 @@ at `/api/v1/docs/`.
 
 The screenshots in `docs/images/` are generated: `make screenshots` starts the local cluster,
 fills it with demo data through the API (the cluster is flushed first) and captures every UI page
-in the light and the dark theme with headless Chrome. It needs Node 22+ and Google Chrome or
+in the light and the dark theme, and Swagger UI, with headless Chrome. It needs Node 22+ and Google Chrome or
 Chromium (`CHROME=/path/to/chrome` overrides the binary). Regenerate them when the UI changes.
 
 ## Publishing the image

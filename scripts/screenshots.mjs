@@ -200,12 +200,25 @@ async function main() {
     await send('Runtime.enable');
     await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: scale, mobile: false });
 
+    // Swagger UI has no dark theme: one picture with the general group expanded. The long API
+    // description is hidden to keep the operations in the frame.
+    await go('/api/v1/docs/');
+    await until('document.querySelectorAll(".opblock-tag").length > 10');
+    await evaluate('document.querySelector(".info .description").style.display = "none"; document.querySelector(".opblock-tag[data-tag=general]").click()');
+    await until('document.querySelectorAll(".opblock").length >= 6');
+    await sleep(500);
+    {
+      const { data } = await send('Page.captureScreenshot', { format: 'png', clip: { x: 0, y: 0, width, height: 1000, scale: 1 }, captureBeyondViewport: true });
+      writeFileSync(join(out, 'api-docs.png'), Buffer.from(data, 'base64'));
+      console.log('saved', join(out, 'api-docs.png'));
+    }
+
     for (const theme of ['light', 'dark']) {
       await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: theme }] });
-      // Captures the page down to the footer, at most maxHeight pixels.
+      // Captures the page down to the footer (the whole page without one), at most maxHeight pixels.
       const shot = async (name, maxHeight = height) => {
         await sleep(300);
-        const bottom = await evaluate('Math.ceil(document.querySelector("footer").getBoundingClientRect().bottom)');
+        const bottom = await evaluate('Math.ceil(document.querySelector("footer")?.getBoundingClientRect().bottom ?? document.documentElement.scrollHeight)');
         const clip = { x: 0, y: 0, width, height: Math.min(bottom, maxHeight), scale: 1 };
         const { data } = await send('Page.captureScreenshot', { format: 'png', clip, captureBeyondViewport: true });
         const file = join(out, `${name}-${theme}.png`);
@@ -233,6 +246,7 @@ async function main() {
       await run('HGET user:7 email');
       await evaluate('document.activeElement.blur()');
       await shot('console', 860);
+
     }
   } finally {
     await browser.close();

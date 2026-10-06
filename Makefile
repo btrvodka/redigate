@@ -43,12 +43,14 @@ docker:
 # put it into .env (GHCR_TOKEN, see .env.example) and log in once:
 #   make docker-login
 # then publish the current commit (a tag like v1.2.0 gives a clean version):
-#   make docker-push                   # ghcr.io/btrvodka/redigate:<version> and :latest
+#   make docker-push                   # ghcr.io/btrvodka/redigate:<version without v> and :latest
 #   make docker-push VERSION=v1.2.0 LATEST=false
 IMAGE ?= ghcr.io/btrvodka/redigate
 GHCR_USER ?= btrvodka
 PLATFORMS ?= linux/amd64,linux/arm64
 LATEST ?= true
+# Image tags have no "v" prefix, like the ones published by CI: v1.2.0 -> 1.2.0.
+IMAGE_TAG := $(patsubst v%,%,$(VERSION))
 
 docker-login:
 	@test -n "$$GHCR_TOKEN" || { echo "GHCR_TOKEN is not set: put it into .env (see .env.example)"; exit 1; }
@@ -57,7 +59,7 @@ docker-login:
 docker-push:
 	@case "$(VERSION)" in *dirty*) echo "refusing to publish $(VERSION): commit the changes or set VERSION"; exit 1;; esac
 	docker buildx build --platform $(PLATFORMS) --build-arg VERSION=$(VERSION) \
-		-t $(IMAGE):$(VERSION) $(if $(filter true,$(LATEST)),-t $(IMAGE):latest) --push .
+		-t $(IMAGE):$(IMAGE_TAG) $(if $(filter true,$(LATEST)),-t $(IMAGE):latest) --push .
 
 # Starts a redis cluster (3 masters, 3 replicas) and redigate on 127.0.0.1:8080.
 up:

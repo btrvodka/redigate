@@ -1,6 +1,7 @@
 name: Release
 
-# Publishes ghcr.io/<owner>/redigate:<version> and :latest for tags like v1.2.3.
+# Publishes ghcr.io/<owner>/redigate:1.2.3, :1.2 and :latest for tags like v1.2.3
+# (metadata-action adds :latest to the highest semver tag, pre-releases don't get it).
 on:
   push:
     tags: ["v*"]
@@ -27,7 +28,6 @@ jobs:
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-            type=raw,value=latest
       - uses: docker/build-push-action@v7
         with:
           context: .

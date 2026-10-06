@@ -55,7 +55,7 @@ context; `.env.example` lists the variables):
 cp .env.example .env                    # then set GHCR_TOKEN in .env
 make docker-login                       # once
 git tag v1.0.0                          # a clean version: dirty trees are not published
-make docker-push                        # ghcr.io/btrvodka/redigate:v1.0.0 and :latest, amd64 and arm64
+make docker-push                        # ghcr.io/btrvodka/redigate:1.0.0 and :latest, amd64 and arm64
 make docker-push LATEST=false           # without moving :latest
 ```
 
